@@ -1,51 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <!-- prompt copilot : how do i link my style.css file within the index.html -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shoes Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Polices Google Fonts : Space Grotesk pour le logo, Inter pour le reste -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body>
-    
-    <!-- <h1>Hello world!</h1>
-    <h2 class="red">title 2</h2>
-    <h3>title 3</h3>
-    <h4 class="red">title 4</h4>
-    <h5>title 5</h5>
 
-    <p>a paragraph</p>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <!-- Ligne du haut : logo | barre de recherche | favoris + panier -->
+    <div class="header-top">
 
-    <img src="data:image/jpeg;base64,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"
-        alt="Magnfique Ferrari"> -->
+      <!-- Logo -->
+      <a href="index.html" class="logo">Shoes Gallery</a>
 
-        <nav class="flex-row-space-between"> 
-            <h1> RunSafe Gallery</h1>
+      <!-- Barre de recherche -->
+      <div class="search-bar">
+        <i data-lucide="search"> </i>
+        <span>Research a product</span>
+      </div>
 
-            <ul class="flex-row-space-between">
-                <li>Men</li>
-                <li>Women</li>
-                <li>Brands</li>
-                <li>Cart <i data-lucide="shopping-cart"> </i></li>
-            </ul>
+      <!-- Favoris et Panier -->
+      <div class="header-actions">
+        <a href="#">
+          <span>Favorites</span>
+          <i data-lucide="heart"> </i>
+        </a>
+        <a href="#">
+          <span>Cart</span>
+          <span class="cart-count" id="cart-count">0</span>
+          <i data-lucide="shopping-cart"> </i>
+        </a>
+      </div>
 
-        </nav>
+    </div>
 
-        <button popovertarget="my-popup">click me</button>
-        
-        <div popover id="my-popup">
-            <p>coucou</p>
+    <!-- Navigation principale -->
+    <nav>
+      <ul>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Kids</a></li>
+        <li><a href="#">Brands</a></li>
+        <li><a href="#" class="active">Deals</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- ===== CONTENU PRINCIPAL ===== -->
+  <main>
+
+    <!-- Titre de section + compteur de résultats -->
+    <div class="page-header">
+      <h2 class="section-title">All our shoes</h2>
+      <span class="results-count">1032 result(s)</span>
+    </div>
+
+    <div class="content">
+
+        <!-- =============================================
+        [IA UTILISÉE - PARTIE COMPLEXE]
+        PROMPT :
+        "Dans mon design, chaque filtre (Sort by, Brands, Gender...)
+        est séparé par une ligne horizontale. J'ai essayé de mettre
+        des balises <hr> mais ça ne ressemble pas au design.
+        Comment faire des lignes de séparation propres entre
+        mes filtres en CSS ?"
+
+        RÉPONSE IA :
+        "Plutôt que d'utiliser <hr>, la bonne pratique est
+        d'utiliser la propriété CSS border sur tes éléments.
+        Tu peux ajouter border-top sur chaque groupe de filtre
+        pour créer une ligne au-dessus. Et border-bottom sur le
+        dernier groupe pour fermer visuellement la liste.
+        En ciblant avec :last-child tu n'as pas besoin d'ajouter
+        une classe spéciale sur le dernier élément.
+        Exemple :
+        .filter-group { border-top: 1px solid #252525; }
+        .filter-group:last-child { border-bottom: 1px solid #252525; }"
+        ============================================= */ -->
+      <aside class="filters">
+
+        <!-- Filtre "Sort by" (ouvert par défaut) -->
+        <div class="filter-group">
+          <div class="filter-header" onclick="toggleFilter(this)">
+            <span>Sort by:</span>
+            <i data-lucide="chevron-up"> </i>
+          </div>
+          <div class="filter-options">
+            <label>
+              <input type="radio" name="sort" value="price-asc" />
+              Price Low to High
+            </label>
+            <label>
+              <input type="radio" name="sort" value="price-desc" />
+              Price High to Low
+            </label>
+            <label>
+              <input type="radio" name="sort" value="name-asc" />
+              Product name A - Z
+            </label>
+            <label>
+              <input type="radio" name="sort" value="name-desc" />
+              Product name Z - A
+            </label>
+          </div>
         </div>
 
+        <!-- Filtre "Brands" (fermé) -->
+        <div class="filter-group">
+          <div class="filter-header" onclick="toggleFilter(this)">
+            <span>Brands</span>
+            <i data-lucide="chevron-down"> </i>
+          </div>
+        </div>
 
-        <h2>My level two title</h2>
+        <!-- Filtre "Gender" (fermé) -->
+        <div class="filter-group">
+          <div class="filter-header" onclick="toggleFilter(this)">
+            <span>Gender</span>
+            <i data-lucide="chevron-down"> </i>
+          </div>
+        </div>
 
-        <script src="https://unpkg.com/lucide@latest"></script>
+        <!-- Filtre "Sizes" (fermé) -->
+        <div class="filter-group">
+          <div class="filter-header" onclick="toggleFilter(this)">
+            <span>Sizes</span>
+            <i data-lucide="chevron-down"> </i>
+          </div>
+        </div>
+
+        <!-- Filtre "Colour" (fermé) -->
+        <div class="filter-group">
+          <div class="filter-header" onclick="toggleFilter(this)">
+            <span>Colour</span>
+            <i data-lucide="chevron-down"> </i>
+          </div>
+        </div>
+
+        <!-- Filtre "Price" (fermé) -->
+        <div class="filter-group">
+          <div class="filter-header" onclick="toggleFilter(this)">
+            <span>Price</span>
+            <i data-lucide="chevron-down"> </i>
+          </div>
+        </div>
+
+      </aside>
+
+
+      <!-- ===== GRILLE DE CHAUSSURES ===== -->
+      <section class="cards-grid">
+
+        <!-- Carte 1 : Forum low og -->
+        <a class="card">
+          <img
+            class="card-image"
+            src="https://makerslab.em-lyon.com/dww/data/products/forum-low-og.png"
+            alt="Forum low og"
+          />
+          <div class="card-info">
+            <h3 class="card-name">Forum low og</h3>
+            <p class="card-brand">Adidas original</p>
+            <p class="card-genre">Men</p>
+            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
+              <i data-lucide="heart"> </i>
+            </button>
+          </div>
+          <p class="card-price">79.90 €</p>
+        </a>
+
+        <!-- Carte 2 : Gel quantum 360 utility -->
+        <a class="card">
+          <img
+            class="card-image"
+            src="https://makerslab.em-lyon.com/dww/data/products/gel-quantum-360-6-utility.png"
+            alt="Gel quantum 360 utility"
+          />
+          <div class="card-info">
+            <h3 class="card-name">Gel quantum 360 utility</h3>
+            <p class="card-brand">Asics</p>
+            <p class="card-genre">Men</p>
+            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
+              <i data-lucide="heart"> </i>
+            </button>
+          </div>
+          <p class="card-price">44.90 €</p>
+        </a>
+
+        <!-- Carte 3 : 327 -->
+        <a class="card">
+          <img
+            class="card-image"
+            src="https://makerslab.em-lyon.com/dww/data/products/327.png"
+            alt="327"
+          />
+          <div class="card-info">
+            <h3 class="card-name">327</h3>
+            <p class="card-brand">New balance</p>
+            <p class="card-genre">Men</p>
+            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
+              <i data-lucide="heart"> </i>
+            </button>
+          </div>
+          <p class="card-price">64.90 €</p>
+        </a>
+
+        <!-- Carte 4 : Air vapormax 2021 FK -->
+        <a class="card">
+          <img
+            class="card-image"
+            src="https://makerslab.em-lyon.com/dww/data/products/air-vapormax-2021-fk.png"
+            alt="Air vapormax 2021 FK"
+          />
+          <div class="card-info">
+            <h3 class="card-name">Air vapormax 2021 FK</h3>
+            <p class="card-brand">Nike</p>
+            <p class="card-genre">Men</p>
+            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
+              <i data-lucide="heart"> </i>
+            </button>
+          </div>
+          <p class="card-price">59.90 €</p>
+        </a>
+
+        <!-- Carte 5 : Rs-Z LTH -->
+        <a class="card">
+          <img
+            class="card-image"
+            src="https://makerslab.em-lyon.com/dww/data/products/rs-z-lth.png"
+            alt="Rs-Z LTH"
+          />
+          <div class="card-info">
+            <h3 class="card-name">Rs-Z LTH</h3>
+            <p class="card-brand">Puma</p>
+            <p class="card-genre">Men</p>
+            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
+              <i data-lucide="heart"> </i>
+            </button>
+          </div>
+          <p class="card-price">49.90 €</p>
+        </a>
+
+        <!-- Carte 6 : Mayze classic -->
+        <a class="card">
+          <img
+            class="card-image"
+            src="https://makerslab.em-lyon.com/dww/data/products/mayze-classic.png"
+            alt="Mayze classic"
+          />
+          <div class="card-info">
+            <h3 class="card-name">Mayze classic</h3>
+            <p class="card-brand">Puma</p>
+            <p class="card-genre">Women</p>
+            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
+              <i data-lucide="heart"> </i>
+            </button>
+          </div>
+          <p class="card-price">44.90 €</p>
+        </a>
+
+      </section>
+    </div>
+  </main>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+
+      <!-- Colonne 1 -->
+      <div class="footer-col">
+        <h3>Shoes Gallery</h3>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Newsletter</a></li>
+        </ul>
+      </div>
+
+      <!-- Colonne 2 -->
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Size guide</a></li>
+        </ul>
+      </div>
+
+      <!-- Colonne 3 -->
+      <div class="footer-col">
+        <h3>Shipping</h3>
+      </div>
+
+    </div>
+  </footer>
+
+
+  </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         lucide.createIcons();
     </script>

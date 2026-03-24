@@ -1,42 +1,686 @@
-/*
+/* =============================================
+   SHOES GALLERY - Styles principaux
+   Basé sur le design Figma
+   ============================================= */
 
-*/
-
-.flex-row-space-between{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+/* --- Variables de couleurs --- */
+:root {
+  --beige: #efecdc;
+  --vert-clair: #bfecac;
+  --gris-carte: #d9d9d9;
+  --texte: #252525;
+  --prix-vert: #4ca626;
+  --gris-clair: #d5d4d4;
+  --blanc: #ffffff;
 }
 
-
-.red {
-    color: #ff0000;
+/* --- Reset de base --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-
-ul {
-    list-style: none;
-    gap: 1em;
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--beige);
+  color: var(--texte);
+  min-height: 100vh;
 }
 
-li {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+/* =============================================
+   HEADER
+   ============================================= */
+
+/* =============================================
+   [IA UTILISÉE - PARTIE COMPLEXE]
+   PROMPT :
+   "Je voudrais que mon header reste visible en haut de la
+   page même quand l'utilisateur fait défiler la page vers
+   le bas. Comment faire ça en CSS sans JavaScript ?"
+
+   RÉPONSE IA :
+   "Utilise position: sticky avec top: 0 sur ton header.
+   Contrairement à position: fixed qui sort l'élément du
+   flux de la page, sticky reste dans le flux et se 'colle'
+   en haut quand on arrive au bord de l'écran. Il faut aussi
+   ajouter un z-index élevé pour que le header passe
+   par-dessus le reste du contenu en scrollant.
+   Exemple :
+   header {
+     position: sticky;
+     top: 0;
+     z-index: 100;
+   }"
+   ============================================= */
+
+header {
+  background-color: var(--vert-clair);
+  border-radius: 0 0 20px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* =============================================
+   [IA UTILISÉE - PARTIE COMPLEXE]
+   PROMPT :
+   "J'ai un header avec 3 éléments : un logo à gauche,
+   une barre de recherche au centre, et des liens à droite.
+   Comment je fais pour les aligner horizontalement et
+   les espacer correctement en CSS ?"
 
-h1 {
-    font-family: "Space Grotesk"
+   RÉPONSE IA :
+   "Utilise display: flex sur le conteneur parent.
+   Pour espacer tes 3 éléments aux extrémités et au centre,
+   ajoute justify-content: space-between. Pour les aligner
+   verticalement au milieu, utilise align-items: center.
+   Exemple :
+   .header-top {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+   }"
+   ============================================= */
+/* Première ligne du header : logo, recherche, favoris/panier */
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 156px;
+  gap: 20px;
 }
 
-h2 {
-    color: green;
-
+/* Logo "Shoes Gallery" */
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--texte);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-h2:hover{
-    transition: color 3s;
-    color: red;
+/* Barre de recherche */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--gris-carte);
+  border-radius: 20px;
+  padding: 6px 16px;
+  width: 215px;
+  cursor: text;
+}
+
+.search-bar img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.search-bar span {
+  font-size: 14px;
+  color: var(--texte);
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+/* Favoris + Panier */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-actions a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--texte);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.header-actions a img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Navigation : Men, Women, Kids, Brands, Deals */
+nav {
+  padding: 0 156px 12px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--texte);
+  font-size: 16px;
+  font-weight: 400;
+  padding-bottom: 2px;
+}
+
+/* L'onglet actif (ici "Deals") s'affiche en vert */
+nav ul li a.active {
+  color: var(--prix-vert);
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* =============================================
+   CONTENU PRINCIPAL
+   ============================================= */
+
+main {
+  padding: 0 156px 40px;
+}
+
+/* Ligne titre + compteur de résultats */
+.page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 30px 0 20px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--texte);
+}
+
+.results-count {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--texte);
+}
+
+/* Mise en page : sidebar filtres + grille de cartes */
+.content {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* =============================================
+   SIDEBAR FILTRES
+   ============================================= */
+
+.filters {
+  width: 288px;
+  flex-shrink: 0;
+}
+
+/* Chaque filtre (Sort by, Brands, Gender...) */
+.filter-group {
+  border-top: 1px solid var(--texte);
+  padding: 8px 0;
+}
+
+.filter-group:last-child {
+  border-bottom: 1px solid var(--texte);
+}
+
+/* En-tête du filtre (titre + flèche) */
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-header span {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--texte);
+}
+
+.filter-header img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Options du filtre "Sort by" (visibles quand ouvert) */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0 0 8px;
+}
+
+.filter-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--texte);
+  cursor: pointer;
+}
+
+.filter-options input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--texte);
+  cursor: pointer;
+}
+
+/* =============================================
+   GRILLE DE CARTES
+   ============================================= */
+
+/* =============================================
+   [IA UTILISÉE - PARTIE COMPLEXE]
+   PROMPT :
+   "Je veux afficher mes cartes de chaussures en 3 colonnes
+   de largeur fixe (288px chacune), avec un espace de 16px
+   entre chaque carte. J'ai essayé avec flexbox mais les
+   cartes ne s'alignent pas bien. Comment faire ?"
+
+   RÉPONSE IA :
+   "CSS Grid est plus adapté ici. Utilise display: grid
+   sur le conteneur, puis grid-template-columns pour définir
+   tes 3 colonnes. La valeur repeat(3, 288px) crée 3 colonnes
+   de 288px chacune. La propriété gap gère l'espacement.
+   Exemple :
+   .cards-grid {
+     display: grid;
+     grid-template-columns: repeat(3, 288px);
+     gap: 16px;
+   }"
+   ============================================= */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 288px);
+  gap: 16px;
+  flex: 1;
+}
+
+/* Carte produit individuelle */
+.card {
+  background-color: var(--gris-carte);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--texte);
+  box-shadow: 0 0 16px rgba(240, 237, 237, 0.8);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Image de la chaussure dans la carte */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* =============================================
+   [IA UTILISÉE - PARTIE COMPLEXE]
+   PROMPT :
+   "Dans le design Figma, le bouton cœur (favoris) est
+   positionné en haut à droite de la zone de texte de la
+   carte, par-dessus le texte. Comment je fais pour
+   superposer un élément par-dessus d'autres en CSS ?"
+
+   RÉPONSE IA :
+   "Il faut utiliser le positionnement CSS. Sur le conteneur
+   parent (.card-info), mets position: relative. Sur le bouton
+   que tu veux superposer, mets position: absolute. Tu peux
+   ensuite utiliser top, right, bottom, left pour le placer
+   exactement où tu veux dans son conteneur parent.
+   Exemple :
+   .card-info { position: relative; }
+   .heart-btn {
+     position: absolute;
+     top: 0;
+     right: 0;
+   }"
+   ============================================= */
+/* Infos texte de la carte */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+.card-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--texte);
+}
+
+.card-brand,
+.card-genre {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--texte);
+}
+
+/* Bouton cœur (favoris) sur la carte */
+.heart-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 2px;
+  line-height: 0;
+}
+
+.heart-btn img {
+  width: 20px;
+  height: 17px;
+}
+
+/* Prix de la carte */
+.card-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--prix-vert);
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+
+footer {
+  background-color: rgba(191, 236, 172, 0.5);
+  border-radius: 20px;
+  padding: 28px 156px;
+  margin: 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Colonne du footer */
+.footer-col h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--texte);
+  margin-bottom: 8px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-col ul li a {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--texte);
+  text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+  text-decoration: underline;
+}
+
+/* =============================================
+   PAGE PRODUIT (product.html)
+   ============================================= */
+
+/* Lien "retour" */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--texte);
+  font-size: 14px;
+  font-weight: 400;
+  margin: 24px 0 16px;
+  opacity: 0.7;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
+
+/* Conteneur de la page produit */
+.product-container {
+  background-color: var(--beige);
+  border-radius: 4px;
+  box-shadow: 0 0 16px rgba(213, 212, 212, 0.8);
+  display: flex;
+  gap: 24px;
+  padding: 32px;
+  max-width: 670px;
+  margin: 0 auto 40px;
+}
+
+/* Colonne gauche : image + infos */
+.product-left {
+  background-color: var(--gris-carte);
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  width: 320px;
+  flex-shrink: 0;
+}
+
+/* Titre, marque, genre dans la colonne gauche */
+.product-titles h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--texte);
+}
+
+.product-titles p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--texte);
+}
+
+/* Grande image du produit */
+.product-image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Bouton cœur sur la page produit */
+.product-heart-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 2px;
+}
+
+.product-heart-btn img {
+  width: 20px;
+  height: 17px;
+}
+
+/* Colonne droite : description, tailles, prix, bouton */
+.product-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Bouton de fermeture (croix) */
+.close-btn {
+  display: flex;
+  justify-content: flex-end;
+  text-decoration: none;
+  color: var(--texte);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  opacity: 0.6;
+}
+
+/* Description */
+.product-description h3 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.product-description p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+  line-height: 1.5;
+}
+
+/* Sélecteur de taille */
+.size-section h3 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.size-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Bouton taille individuel */
+.size-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+/* Taille disponible */
+.size-btn.available {
+  background-color: transparent;
+  border: 1px solid var(--texte);
+  color: var(--texte);
+}
+
+.size-btn.available:hover {
+  background-color: var(--texte);
+  color: var(--blanc);
+}
+
+/* Taille sélectionnée */
+.size-btn.selected {
+  background-color: var(--texte);
+  border: 1px solid var(--texte);
+  color: var(--blanc);
+}
+
+/* Taille indisponible */
+.size-btn.unavailable {
+  background-color: transparent;
+  border: 1px solid var(--gris-clair);
+  color: var(--gris-clair);
+  cursor: not-allowed;
+}
+
+/* Prix sur la page produit */
+.product-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--prix-vert);
+  text-align: right;
+}
+
+/* Bouton "Add to cart" */
+.add-to-cart-btn {
+  background-color: var(--vert-clair);
+  color: #323232;
+  border: none;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border-radius: 4px;
+  align-self: flex-end;
+  margin-top: auto;
+  transition: background-color 0.15s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #a8dfa0;
+}
+
+/* Notification panier */
+.cart-notification {
+  display: none;
+  background-color: var(--vert-clair);
+  color: var(--texte);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.cart-notification.visible {
+  display: block;
+}
+
+/* Compteur panier dans le header */
+.cart-count {
+  background-color: var(--prix-vert);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.cart-count.visible {
+  display: inline-flex;
 }
