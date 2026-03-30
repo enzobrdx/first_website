@@ -5,44 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shoes Gallery</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Polices Google Fonts : Space Grotesk pour le logo, Inter pour le reste -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@700&display=swap"
     rel="stylesheet"
   />
 </head>
 <body>
-
+ 
   <!-- ===== HEADER ===== -->
   <header>
-    <!-- Ligne du haut : logo | barre de recherche | favoris + panier -->
     <div class="header-top">
-
-      <!-- Logo -->
       <a href="index.html" class="logo">Shoes Gallery</a>
-
-      <!-- Barre de recherche -->
+ 
       <div class="search-bar">
-        <i data-lucide="search"> </i>
+        <i data-lucide="search"></i>
         <span>Research a product</span>
       </div>
-
-      <!-- Favoris et Panier -->
+ 
       <div class="header-actions">
         <a href="#">
           <span>Favorites</span>
-          <i data-lucide="heart"> </i>
+          <i data-lucide="heart"></i>
         </a>
         <a href="#">
           <span>Cart</span>
-          <span class="cart-count" id="cart-count">0</span>
-          <i data-lucide="shopping-cart"> </i>
+          <i data-lucide="shopping-cart"></i>
         </a>
       </div>
-
     </div>
-
-    <!-- Navigation principale -->
+ 
     <nav>
       <ul>
         <li><a href="#">Men</a></li>
@@ -53,232 +44,81 @@
       </ul>
     </nav>
   </header>
-
-
+ 
+ 
   <!-- ===== CONTENU PRINCIPAL ===== -->
   <main>
-
-    <!-- Titre de section + compteur de résultats -->
     <div class="page-header">
       <h2 class="section-title">All our shoes</h2>
-      <span class="results-count">1032 result(s)</span>
+      <!-- Rempli dynamiquement par script.js -->
+      <span class="results-count" id="results-count">Loading...</span>
     </div>
-
+ 
     <div class="content">
-
-        <!-- =============================================
-        [IA UTILISÉE - PARTIE COMPLEXE]
-        PROMPT :
-        "Dans mon design, chaque filtre (Sort by, Brands, Gender...)
-        est séparé par une ligne horizontale. J'ai essayé de mettre
-        des balises <hr> mais ça ne ressemble pas au design.
-        Comment faire des lignes de séparation propres entre
-        mes filtres en CSS ?"
-
-        RÉPONSE IA :
-        "Plutôt que d'utiliser <hr>, la bonne pratique est
-        d'utiliser la propriété CSS border sur tes éléments.
-        Tu peux ajouter border-top sur chaque groupe de filtre
-        pour créer une ligne au-dessus. Et border-bottom sur le
-        dernier groupe pour fermer visuellement la liste.
-        En ciblant avec :last-child tu n'as pas besoin d'ajouter
-        une classe spéciale sur le dernier élément.
-        Exemple :
-        .filter-group { border-top: 1px solid #252525; }
-        .filter-group:last-child { border-bottom: 1px solid #252525; }"
-        ============================================= */ -->
+ 
+      <!-- ===== SIDEBAR : Filtres ===== -->
       <aside class="filters">
-
-        <!-- Filtre "Sort by" (ouvert par défaut) -->
+ 
         <div class="filter-group">
           <div class="filter-header" onclick="toggleFilter(this)">
             <span>Sort by:</span>
-            <i data-lucide="chevron-up"> </i>
+            <i data-lucide="chevron-up"></i>
           </div>
           <div class="filter-options">
-            <label>
-              <input type="radio" name="sort" value="price-asc" />
-              Price Low to High
-            </label>
-            <label>
-              <input type="radio" name="sort" value="price-desc" />
-              Price High to Low
-            </label>
-            <label>
-              <input type="radio" name="sort" value="name-asc" />
-              Product name A - Z
-            </label>
-            <label>
-              <input type="radio" name="sort" value="name-desc" />
-              Product name Z - A
-            </label>
+            <label><input type="radio" name="sort" value="price-asc" /> Price Low to High</label>
+            <label><input type="radio" name="sort" value="price-desc" /> Price High to Low</label>
+            <label><input type="radio" name="sort" value="name-asc" /> Product name A - Z</label>
+            <label><input type="radio" name="sort" value="name-desc" /> Product name Z - A</label>
           </div>
         </div>
-
-        <!-- Filtre "Brands" (fermé) -->
+ 
         <div class="filter-group">
           <div class="filter-header" onclick="toggleFilter(this)">
             <span>Brands</span>
-            <i data-lucide="chevron-down"> </i>
+            <i data-lucide="chevron-down"></i>
           </div>
         </div>
-
-        <!-- Filtre "Gender" (fermé) -->
+ 
         <div class="filter-group">
           <div class="filter-header" onclick="toggleFilter(this)">
             <span>Gender</span>
-            <i data-lucide="chevron-down"> </i>
+            <i data-lucide="chevron-down"></i>
           </div>
         </div>
-
-        <!-- Filtre "Sizes" (fermé) -->
+ 
         <div class="filter-group">
           <div class="filter-header" onclick="toggleFilter(this)">
             <span>Sizes</span>
-            <i data-lucide="chevron-down"> </i>
+            <i data-lucide="chevron-down"></i>
           </div>
         </div>
-
-        <!-- Filtre "Colour" (fermé) -->
+ 
         <div class="filter-group">
           <div class="filter-header" onclick="toggleFilter(this)">
             <span>Colour</span>
-            <i data-lucide="chevron-down"> </i>
+            <i data-lucide="chevron-down"></i>
           </div>
         </div>
-
-        <!-- Filtre "Price" (fermé) -->
+ 
         <div class="filter-group">
           <div class="filter-header" onclick="toggleFilter(this)">
             <span>Price</span>
-            <i data-lucide="chevron-down"> </i>
+            <i data-lucide="chevron-down"></i>
           </div>
         </div>
-
+ 
       </aside>
-
-
-      <!-- ===== GRILLE DE CHAUSSURES ===== -->
-      <section class="cards-grid">
-
-        <!-- Carte 1 : Forum low og -->
-        <a class="card">
-          <img
-            class="card-image"
-            src="https://makerslab.em-lyon.com/dww/data/products/forum-low-og.png"
-            alt="Forum low og"
-          />
-          <div class="card-info">
-            <h3 class="card-name">Forum low og</h3>
-            <p class="card-brand">Adidas original</p>
-            <p class="card-genre">Men</p>
-            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
-              <i data-lucide="heart"> </i>
-            </button>
-          </div>
-          <p class="card-price">79.90 €</p>
-        </a>
-
-        <!-- Carte 2 : Gel quantum 360 utility -->
-        <a class="card">
-          <img
-            class="card-image"
-            src="https://makerslab.em-lyon.com/dww/data/products/gel-quantum-360-6-utility.png"
-            alt="Gel quantum 360 utility"
-          />
-          <div class="card-info">
-            <h3 class="card-name">Gel quantum 360 utility</h3>
-            <p class="card-brand">Asics</p>
-            <p class="card-genre">Men</p>
-            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
-              <i data-lucide="heart"> </i>
-            </button>
-          </div>
-          <p class="card-price">44.90 €</p>
-        </a>
-
-        <!-- Carte 3 : 327 -->
-        <a class="card">
-          <img
-            class="card-image"
-            src="https://makerslab.em-lyon.com/dww/data/products/327.png"
-            alt="327"
-          />
-          <div class="card-info">
-            <h3 class="card-name">327</h3>
-            <p class="card-brand">New balance</p>
-            <p class="card-genre">Men</p>
-            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
-              <i data-lucide="heart"> </i>
-            </button>
-          </div>
-          <p class="card-price">64.90 €</p>
-        </a>
-
-        <!-- Carte 4 : Air vapormax 2021 FK -->
-        <a class="card">
-          <img
-            class="card-image"
-            src="https://makerslab.em-lyon.com/dww/data/products/air-vapormax-2021-fk.png"
-            alt="Air vapormax 2021 FK"
-          />
-          <div class="card-info">
-            <h3 class="card-name">Air vapormax 2021 FK</h3>
-            <p class="card-brand">Nike</p>
-            <p class="card-genre">Men</p>
-            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
-              <i data-lucide="heart"> </i>
-            </button>
-          </div>
-          <p class="card-price">59.90 €</p>
-        </a>
-
-        <!-- Carte 5 : Rs-Z LTH -->
-        <a class="card">
-          <img
-            class="card-image"
-            src="https://makerslab.em-lyon.com/dww/data/products/rs-z-lth.png"
-            alt="Rs-Z LTH"
-          />
-          <div class="card-info">
-            <h3 class="card-name">Rs-Z LTH</h3>
-            <p class="card-brand">Puma</p>
-            <p class="card-genre">Men</p>
-            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
-              <i data-lucide="heart"> </i>
-            </button>
-          </div>
-          <p class="card-price">49.90 €</p>
-        </a>
-
-        <!-- Carte 6 : Mayze classic -->
-        <a class="card">
-          <img
-            class="card-image"
-            src="https://makerslab.em-lyon.com/dww/data/products/mayze-classic.png"
-            alt="Mayze classic"
-          />
-          <div class="card-info">
-            <h3 class="card-name">Mayze classic</h3>
-            <p class="card-brand">Puma</p>
-            <p class="card-genre">Women</p>
-            <button class="heart-btn" onclick="event.preventDefault(); toggleHeart(this)">
-              <i data-lucide="heart"> </i>
-            </button>
-          </div>
-          <p class="card-price">44.90 €</p>
-        </a>
-
-      </section>
+ 
+      <!-- Grille vide — remplie par script.js -->
+      <section class="cards-grid" id="cards-grid"></section>
+ 
     </div>
   </main>
-
-
+ 
+ 
   <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-inner">
-
-      <!-- Colonne 1 -->
       <div class="footer-col">
         <h3>Shoes Gallery</h3>
         <ul>
@@ -286,8 +126,6 @@
           <li><a href="#">Newsletter</a></li>
         </ul>
       </div>
-
-      <!-- Colonne 2 -->
       <div class="footer-col">
         <h3>Services</h3>
         <ul>
@@ -295,21 +133,16 @@
           <li><a href="#">Size guide</a></li>
         </ul>
       </div>
-
-      <!-- Colonne 3 -->
       <div class="footer-col">
         <h3>Shipping</h3>
       </div>
-
     </div>
   </footer>
-
-
-  </script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        lucide.createIcons();
-    </script>
-
+ 
+ 
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="script.js"></script>
+ 
 </body>
 </html>

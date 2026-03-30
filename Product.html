@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shoes Gallery – Product</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+ 
+  <!-- ===== HEADER (identique à index.html) ===== -->
+  <header>
+    <div class="header-top">
+      <a href="index.html" class="logo">Shoes Gallery</a>
+ 
+      <div class="search-bar">
+        <i data-lucide="search"></i>
+        <span>Research a product</span>
+      </div>
+ 
+      <div class="header-actions">
+        <a href="#">
+          <span>Favorites</span>
+          <i data-lucide="heart"></i>
+        </a>
+        <a href="#">
+          <span>Cart</span>
+          <i data-lucide="shopping-cart"></i>
+        </a>
+      </div>
+    </div>
+ 
+    <nav>
+      <ul>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Kids</a></li>
+        <li><a href="#">Brands</a></li>
+        <li><a href="#" class="active">Deals</a></li>
+      </ul>
+    </nav>
+  </header>
+ 
+ 
+  <!-- ===== PAGE PRODUIT ===== -->
+  <main class="product-main">
+ 
+    <!-- Lien retour vers l'accueil -->
+    <a href="index.html" class="back-link">← Back to all shoes</a>
+ 
+    <!-- Bloc card-clicked (fidèle au Figma) -->
+    <!-- Rempli dynamiquement par product.js -->
+    <div class="product-card">
+ 
+      <!-- Colonne gauche : image + nom/marque/genre + cœur -->
+      <div class="product-left">
+        <div class="product-titles">
+          <h2 id="product-name"></h2>
+          <p id="product-brand"></p>
+          <p id="product-gender"></p>
+        </div>
+        <img class="product-image" id="product-image" src="" alt="" />
+        <button class="product-heart-btn">
+          <i data-lucide="heart"></i>
+        </button>
+      </div>
+ 
+      <!-- Colonne droite : croix, description, tailles, prix, bouton -->
+      <div class="product-right">
+ 
+        <!-- Bouton fermer = retour à l'accueil -->
+        <a href="index.html" class="product-close-btn">
+          <i data-lucide="x"></i>
+        </a>
+ 
+        <div class="product-description">
+          <h3>Description</h3>
+          <p id="product-description"></p>
+        </div>
+ 
+        <div class="product-sizes">
+          <h3>Select size</h3>
+          <!-- Généré par product.js -->
+          <div class="size-grid" id="size-grid"></div>
+        </div>
+ 
+        <p class="product-price" id="product-price"></p>
+ 
+        <div class="product-btn-container">
+          <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+ 
+      </div>
+    </div>
+ 
+  </main>
+ 
+ 
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h3>Shoes Gallery</h3>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Newsletter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Size guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Shipping</h3>
+      </div>
+    </div>
+  </footer>
+ 
+ 
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="product.js"></script>
+ 
+</body>
+</html>
